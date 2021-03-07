@@ -9,12 +9,13 @@
 void meansensors();
 void readCalibration();
 void writeCalibration();
+void Heartbeat();
 
 ADC_MODE(ADC_VCC);         // to use getVcc
 
 //#define Wifi_AP_Access
 #ifdef Wifi_AP_Access
-const char* ssid = "ESP8266Test";
+const char* ssid = "DualLevel";
 const char* password = "";
 #else
 const char* ssid = "SKYPEMHG";
@@ -171,13 +172,18 @@ void loop()
     meansensors();
     ws.cleanupClients();
     sendMessage(); 
-    AsyncElegantOTA.loop(); 
+    AsyncElegantOTA.loop();
+    Heartbeat(); 
 }
-
+void Heartbeat(){
+  static unsigned long blink=0;
+  if(blink < millis()){
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+    blink += 1500 * digitalRead(LED_BUILTIN) + 25;
+  }
+}
 void meansensors() {
 float buff_p=0 ,buff_r=0; 
-static int Blinker=0;
-
     for (int i=0;i<10;i++)
      {
       fifoCount = mpu.getFIFOCount();    
@@ -193,12 +199,6 @@ static int Blinker=0;
       mean_p = buff_p/10*180/PI-caly;
       mean_r = buff_r/10*180/PI-calz;
       temperature = mpu.getTemperature() /340+36.53; 
-    if(Blinker++ >20) digitalWrite(LED_BUILTIN,LOW);
-    if(Blinker > 23) 
-    {
-        digitalWrite(LED_BUILTIN,HIGH);
-        Blinker = 0;
-    } 
 }
 
 void readCalibration()

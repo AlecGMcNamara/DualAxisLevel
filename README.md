@@ -1,6 +1,6 @@
 # DualAxisLevel
-ESP8266 project using MPU6050 to measure vertical and horizontal axis and display the readings on a mobile phone.
-Designed for the installation of a insulated glass production line at 6 degrees inclination. The box is made on a
+ESP8266 project using MPU6050 to measure vertical and horizontal axis and display the readings on a mobile phone browser.
+Designed for the installation of a insulated glass production line at 6 degrees inclination. The enclosure is made on a
 3d printer and the cad files are included.
 
 The box hangs on top of a glass on the production line and has 3mm air float spacer built in.

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Dual Axis Level</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <link rel="icon" type="image/png" href="\images\favicon.png">
+</head>
+<body>
+ <div class="topnav">
+    <h1>Dual Axis Level</h1>
+ </div>
+<div class="card-grid"> 
+    <div class="card">
+            <p><img src="\images\ConveyorAngle.png" width="50" height="100" style="vertical-align:middle">
+                <Label class="axis-display" id="axis1" >&deg;</label></p>
+        </div>
+    <div class="card">
+               <p><img src="\images\ConveyorLevel.png" width="100" height="50" style="vertical-align:middle">
+                <Label class="axis-display" id="axis2" >&deg;</label></p>   
+    </div>
+    <div class="card"><p class="card-title">Calibrate</p>
+        <label class="switch">
+            <input type="checkbox" id=calibrate onchange='waitSwitchOn();'>
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="card">
+        <p class="card-title">Battery Voltage</p>
+        <p><label class="axis-display" id="batteryVoltage"></label>
+        <img src="" id="batImg" style="vertical-align:middle"></p>
+    </div>
+    <div class="card">
+        <p class="card-title">Temperature</p>
+        <label class="axis-display" id="LevelTemperature">v</label>   
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

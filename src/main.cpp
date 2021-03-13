@@ -63,11 +63,9 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     deserializeJson(jsonReceived,(char*)data);
      // check for calibration request
      if((bool)jsonReceived["Calibrate"])
-        {     
-          caly=0; calz=0;
-          meansensors();
-          caly = mean_p - 6;  //reset to 6 degrres
-          calz = mean_r;
+        {  
+          caly = mean_p + caly - 6;  //reset to 6 degrres
+          calz = mean_r + calz;      //reset to 0
           writeCalibration();
         }
   }
@@ -164,14 +162,12 @@ void setup(){
   mpu.dmpInitialize();
   packetSize = mpu.dmpGetFIFOPacketSize();
   mpu.setDMPEnabled(true); 
-
 }
 
 void loop()
 { 
     meansensors();
-    ws.cleanupClients();
-    sendMessage(); 
+    ws.cleanupClients(); 
     AsyncElegantOTA.loop();
     Heartbeat(); 
 }
@@ -184,11 +180,12 @@ void Heartbeat(){
 }
 void meansensors() {
 float buff_p=0 ,buff_r=0; 
+  //exit until 10 packets are ready
+  if(mpu.getFIFOCount() > 419)
+  {
+    //read packet by packet and make calculations
     for (int i=0;i<10;i++)
      {
-      fifoCount = mpu.getFIFOCount();    
-      while (fifoCount < packetSize) {
-        fifoCount = mpu.getFIFOCount();  }
       mpu.getFIFOBytes(fifoBuffer,packetSize);
       mpu.dmpGetQuaternion(&q,fifoBuffer);
       mpu.dmpGetGravity(&gravity,&q);
@@ -198,7 +195,9 @@ float buff_p=0 ,buff_r=0;
      }
       mean_p = buff_p/10*180/PI-caly;
       mean_r = buff_r/10*180/PI-calz;
-      temperature = mpu.getTemperature() /340+36.53; 
+      temperature = mpu.getTemperature() /340+36.53;
+      sendMessage(); //update browser
+  }
 }
 
 void readCalibration()

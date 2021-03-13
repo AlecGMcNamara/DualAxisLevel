@@ -183,7 +183,7 @@ float buff_p=0 ,buff_r=0;
   //exit until 10 packets are ready
   if(mpu.getFIFOCount() > 419)
   {
-    //read packet by packet and make calculations
+    //read packet by packet and make the calculations
     for (int i=0;i<10;i++)
      {
       mpu.getFIFOBytes(fifoBuffer,packetSize);

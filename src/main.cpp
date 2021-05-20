@@ -13,13 +13,13 @@ void Heartbeat();
 
 ADC_MODE(ADC_VCC);         // to use getVcc
 
-#define Wifi_AP_Access
+//#define Wifi_AP_Access
 #ifdef Wifi_AP_Access
 const char* ssid = "DualLevel";
 const char* password = "11111111";
 #else
-const char* ssid = "SKYPEMHG";
-const char* password = "8NHetSWQAJ75";
+const char* ssid = "BystronicAM";
+const char* password = "07880196169";
 #endif
 
 AsyncWebServer server(80);

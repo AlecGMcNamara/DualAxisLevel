@@ -13,10 +13,10 @@ void Heartbeat();
 
 ADC_MODE(ADC_VCC);         // to use getVcc
 
-//#define Wifi_AP_Access
+#define Wifi_AP_Access
 #ifdef Wifi_AP_Access
 const char* ssid = "DualLevel";
-const char* password = "";
+const char* password = "11111111";
 #else
 const char* ssid = "SKYPEMHG";
 const char* password = "8NHetSWQAJ75";

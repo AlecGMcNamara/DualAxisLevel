@@ -13,6 +13,7 @@ void Heartbeat();
 
 ADC_MODE(ADC_VCC);         // to use getVcc
 
+//AP mode is too sluggish so test ran from HooToo hotspot
 //#define Wifi_AP_Access
 #ifdef Wifi_AP_Access
 const char* ssid = "DualLevel";

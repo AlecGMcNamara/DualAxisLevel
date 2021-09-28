@@ -19,8 +19,8 @@ ADC_MODE(ADC_VCC);         // to use getVcc
 const char* ssid = "DualLevel";
 const char* password = "11111111";
 #else
-const char* ssid = "BystronicAM";
-const char* password = "07880196169";
+const char* ssid = "Bystxxxxxxx";
+const char* password = "07xxxxxxxxxx";
 #endif
 
 AsyncWebServer server(80);
